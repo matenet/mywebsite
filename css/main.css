@@ -191,6 +191,15 @@ footer > div > .footer-logo{
 .about-me-text{
     padding: 1vmin 10vmin;
 }
+.contact-icons-wrapper{
+ flex-direction: row;
+ flex: 50%;
+ justify-content: center;
+}
+.contact-icons-wrapper img{ 
+    width: 12vmin;
+    margin:3vmin;
+}
 footer{
     position: absolute;
     bottom: 0;
