@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Matenet Mateusz Wnęk - Full Stack Developer</title>
+    <link rel="icon" type="image/ico" sizes="32x32" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/fullpage.min.css">
+</head>
+<body>
+   <div class="content-wrapper" id="fullpage">
+      <header class="home-section">
+         <nav class="top-nav">
+        <div class="square left-from-menu-button"></div>
+         <div class="square right-from-menu-button"></div>
+          <div class="square" id="menu-button">
+              <span class="menu-icon"></span>
+          </div>    
+           <ul>
+               <li><a href="#o-mnie"><span class="square" id="about-me-button"><img src="img/about.svg" alt="Matenet Mateusz Wnęk - ikona portfolio"></span></a></li>
+               <li><a href="#portfolio"><span class="square" id="portfolio-button"><img src="img/portfolio.svg" alt="Matenet Mateusz Wnęk - ikona osoby"></span></a></li>
+               <li><a href="#kontakt"><span class="square" id="contact-button"><img src="img/contact.svg" alt="Matenet Mateusz Wnęk - ikona kontaktu"></span></a></li>
+            </ul>           
+       </nav> 
+   </header> 
+   <section class="section home-section">
+       <h1>Mateusz Wnęk</h1>
+       <h2>Full Stack Developer</h2>
+       <img src="img/matenet-logo.png" alt="Logo matenet - programowanie stron www - mobile first" class="logo">
+            <a href="#o-mnie">
+                <div class="square scroll-down">
+                    <span class="arrow-down"></span>  
+                </div>
+            </a> 
+    </section>
+    <section class="section about-me-section">
+        <h2 class="section-title text-white">O mnie</h2>
+        <article class="columns-wrapper">
+            <img src="img/my_img.jpg" alt="Mateusz Wnęk Full Stack Developer" class="my-photo">
+            <p class="about-me-text text-white">
+                Jestem ambitnym full stack developerem, który lubi uczyć się nowych technologii, aby móc wykorzystać je w swoich projektach.
+                Zawodowo zajmuję się programowaniem już od ponad 3 lat. Podczas studiów miałem okazję programować w kilku językach, między innymi w takich jak: C++, czy JAVA. 
+                Zawsze jednak wracałem do programowania webowego z użyciem HTML, CSS i JS. Podoba mi się w nim możliwość tworzenia łatwo dostępnych aplikacji, które działają online - bez potrzeby instalacji.
+                Ponadto projektując estetyczny i funkcjonalny design dla aplikacji webowych, pozwalam uwolnić się swojej duszy artystycznej.
+            </p>
+        </article>
+            <a href="#portfolio">
+                <div class="square scroll-down white-background">
+                    <span class="arrow-down red-arrow"></span>  
+                </div>
+            </a>
+    </section>
+    </section>
+    <section class="section portfolio-section">
+            <h1>Section 3</h1>
+            <a href="#kontakt">
+                <div class="square scroll-down red-background">
+                    <span class="arrow-down"></span>  
+                </div>
+            </a>
+    </section>
+    </section>
+    <section class="section contact-section">
+            <h1>Section 4</h1>
+            <footer class="home-section">
+                <div class="square left-from-menu-button white-background"></div>
+                <div class="square right-from-menu-button white-background"></div>
+                <div class="square white-background">  
+                    <img src="img/matenet-logo.png" alt="Logo matenet - programowanie stron www - mobile first" class="footer-logo">
+                </div>   
+            </footer> 
+    </section>
+   </div>
+
+    <script src="js/fullpage.min.js"></script>
+    <script type="text/javascript">
+        var myFullpage = new fullpage('#fullpage', {
+            anchors: ['home', 'o-mnie', 'portfolio', 'kontakt'],
+            lazyLoad: true
+        });
+    </script>
+    <script src="js/main.js"></script>
+
+</body>
+</html>

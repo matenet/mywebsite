@@ -1,0 +1,240 @@
+*{
+    box-sizing: border-box;
+}
+@font-face{
+    font-family: Licencia;
+    font-display: auto;
+    src: url(../fonts/Licencia.ttf);    
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+h1, h2, h3, p {
+    width: 100vw;
+    margin: 0;
+    font-family: Licencia, Arial, "Helvetica Neue", Helvetica, sans-serif;    
+    letter-spacing: 4px;
+    font-weight: 400;
+}
+h1{    
+    font-size: 19vmin;
+}
+h2{
+    font-size: 5vmin;
+}
+p{
+    font-size: 3vmin;
+    letter-spacing: 1px;
+    text-align: justify;
+}
+.section-title{
+    font-size: 7vmin
+}
+.text-white{
+    color: #fff;
+}
+.text-red{
+    color: #db666f;
+}
+.content-wrapper{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    text-align: center;
+}
+nav ul {
+    margin: 0;
+}
+nav ul li {
+    list-style: none;
+}
+.square{
+    width: 10vh;
+    height: 10vh;
+    background-color: #ffad4c;
+    border-radius: 10%;    
+    position: absolute;
+    left: 50%;
+    top:0;
+    transition: all 0.4s ease;
+    transform: rotate(45deg) translate(-17.5%, 55%);
+}
+.square img{
+    width: 70%;
+    transform: rotate(-45deg) translate(-15%, 12.5%);
+}
+.menu-icon, .menu-icon::before, .menu-icon::after{
+    width: 60%;
+    height: 3px;    
+    display: block;
+    position: absolute;
+    top: 48%;
+    left: 21%;
+    background: #fff;
+    transform: rotate(-45deg) translate(0);
+}
+.menu-icon::before, .menu-icon::after{
+    content: " ";
+    width: 100%;
+    height: 100%;
+}
+.menu-icon::before{
+    top: -300%;
+    left: 0;
+    transform: translate(0%);
+}
+.menu-icon::after{
+    top: 300%;
+    left: 0;
+    transform: translate(0%);
+}
+#menu-button{
+    cursor: pointer;
+    z-index: 5;
+}
+.left-from-menu-button{
+    transform: rotate(45deg) translate(-17.5%, -60%);
+}
+.right-from-menu-button{
+    transform: rotate(45deg) translate(-132.5%, 55%);
+}
+#portfolio-button, #about-me-button,#contact-button{z-index: 2;}
+.menu-item-0{
+   transform: rotate(45deg) translate(-17.5%, 170%); 
+}
+.menu-item-1{
+   transform: rotate(45deg) translate(97.5%, 170%); 
+}
+.menu-item-2{
+   transform: rotate(45deg) translate(97.5%, 55%); 
+}
+.square.scroll-down{
+    top: unset;    
+    bottom: 0;
+    transform: rotate(45deg) translate(0%, 72.5%);
+}
+footer > div > .footer-logo{
+    display: block;
+    text-align: center;
+    left: -12.5%;
+    position: absolute;
+    top: 63%;
+    transform: rotate(135deg) translate(-50%);
+}
+.white-background{
+    background-color: #fff;
+}
+.red-background{
+    background-color: #db666f;
+}
+.orange-background{
+    background-color: #ffad4c;
+}
+.logo{
+    height: 9vmin;
+    margin-top: 4vmin;
+}
+.arrow-down, .arrow-down::before, .arrow-down::after{
+    background-color: #fff;
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+}
+.arrow-down::before, .arrow-down::after{
+    content: " ";
+    display: block;
+    width: 2.5vh;
+    height: 3px;
+}
+.arrow-down::before{
+    top: 3.55vh;
+    left: 1.3vh;
+    animation: bounceUpBefore 3s infinite;
+}
+.arrow-down::after{
+    top: 2.5vh;
+    left: 2.5vh;
+    transform: rotate(90deg);
+    animation: bounceUpAfter 3s infinite;
+}
+.red-arrow::before, .red-arrow::after{
+    background-color: #db666f;
+}
+.columns-wrapper{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    margin:4vmin 10vmin;
+}
+.about-me-section {
+    background-image: linear-gradient(#ffad4c, #db666f);
+    z-index: 2;
+}
+.portfolio-section {
+    background-color: #fff;
+    z-index: 3;
+}
+.contact-section {
+    background-image: linear-gradient(#db666f, #ffad4c);
+    z-index: 4;
+}
+.my-photo {
+    max-width: 30vmin;
+    border-radius: 10%; 
+    margin: 0 0 10% 0;   
+}
+.about-me-text{
+    padding: 1vmin 10vmin;
+}
+footer{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: rotate(180deg);
+}
+
+@keyframes bounceUpBefore {
+    0%{top: 3.55vh;
+    left: 1.3vh;}
+    15%{top: 3.05vh;
+    left: 0.8vh;}
+    30%{top: 3.55vh;
+    left: 1.3vh;}
+}
+@keyframes bounceUpAfter {
+    0% {
+        top: 2.5vh;
+        left: 2.5vh;
+    }
+    15% {
+        top: 2vh;
+        left: 2vh;
+    }
+    30% {
+        top: 2.5vh;
+        left: 2.5vh;
+    }
+}
+@media screen and (min-width:968px){
+    .square{
+        width: 9vh;
+        height: 9vh;
+    }
+}
+@media screen and (orientation: landscape) {
+    .columns-wrapper{
+        display:flex;
+        flex-direction: row;
+    }
+    .my-photo {
+        margin: 0;
+    }
+    .about-me-text{
+        padding: 0 0 0 10vmin;
+    }
+}
