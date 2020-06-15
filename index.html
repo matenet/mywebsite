@@ -51,9 +51,18 @@
                 </div>
             </a>
     </section>
-    </section>
     <section class="section portfolio-section">
         <h2 class="section-title">Portfolio</h2>
+        <ul class="portfolio-list">
+            <li class="hide">
+              TEST
+            </li>
+            <li class="prev">1</li>
+            <li class="act">2</li>
+            <li class="next">3</li>
+            <li class="next new-next">12</li>
+          </ul>
+          <div class="swipe"></div>
             <a href="#kontakt">
                 <div class="square scroll-down red-background">
                     <span class="arrow-down"></span>  
@@ -80,6 +89,7 @@
    </div>
 
     <script src="js/fullpage.min.js"></script>
+    <script src="https://hammerjs.github.io/dist/hammer.js"></script>
     <script type="text/javascript">
         var myFullpage = new fullpage('#fullpage', {
             anchors: ['home', 'o-mnie', 'portfolio', 'kontakt'],
@@ -87,6 +97,92 @@
         });
     </script>
     <script src="js/main.js"></script>
+
+<script>
+    const $ = selector => {
+  return document.querySelector(selector);
+};
+
+function next() {
+  if ($(".hide")) {
+    $(".hide").remove(); 
+  }
+
+  /* Step */
+
+  if ($(".prev")) {
+    $(".prev").classList.add("hide");
+    $(".prev").classList.remove("prev");
+  }
+
+  $(".act").classList.add("prev");
+  $(".act").classList.remove("act");
+
+  $(".next").classList.add("act");
+  $(".next").classList.remove("next");
+
+  /* New Next */
+
+  $(".new-next").classList.remove("new-next");
+
+  const addedEl = document.createElement('li');
+
+  $(".portfolio-list").appendChild(addedEl);
+  addedEl.classList.add("next","new-next");
+}
+
+function prev() {
+  $(".new-next").remove();
+    
+  /* Step */
+
+  $(".next").classList.add("new-next");
+
+  $(".act").classList.add("next");
+  $(".act").classList.remove("act");
+
+  $(".prev").classList.add("act");
+  $(".prev").classList.remove("prev");
+
+  /* New Prev */
+
+  $(".hide").classList.add("prev");
+  $(".hide").classList.remove("hide");
+
+  const addedEl = document.createElement('li');
+
+  $(".portfolio-list").insertBefore(addedEl, $(".portfolio-list").firstChild);
+  addedEl.classList.add("hide");
+}
+
+slide = element => {
+  /* Next slide */
+  
+  if (element.classList.contains('next')) {
+    next();
+    
+  /* Previous slide */
+    
+  } else if (element.classList.contains('prev')) {
+    prev();
+  }
+}
+
+const slider = $(".portfolio-list"),
+      swipe = new Hammer($(".swipe"));
+
+slider.onclick = event => {
+  slide(event.target);
+}
+
+swipe.on("swipeleft", (ev) => {
+  next();
+});
+
+swipe.on("swiperight", (ev) => {
+  prev();
+});
+</script>
 
 </body>
 </html>

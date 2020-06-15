@@ -16,18 +16,19 @@ body{
 h1, h2, h3, p {
     width: 100vw;
     margin: 0;
-    font-family: Licencia, Arial, "Helvetica Neue", Helvetica, sans-serif;    
-    letter-spacing: 4px;
+    font-family: Licencia, Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-weight: 400;
 }
 h1{    
     font-size: 19vmin;
+    letter-spacing: 4px;
 }
 h2{
-    font-size: 5vmin;
+    font-size: 6vmin;
+    letter-spacing: 2px;
 }
 p{
-    font-size: 3vmin;
+    font-size: 4vmin;
     letter-spacing: 1px;
     text-align: justify;
 }
@@ -179,76 +180,70 @@ footer > div > .footer-logo{
     background-color: #fff;
     z-index: 3;
 }
-
-
-.list {
-    height: 200px;
-    position: absolute;
-    top: 50%;
+.portfolio-list {
+    height: 60vmin;
+    position: relative;
+    margin: 7vmin 0;
     left: 50%;
-    transform: translate(-50%,-50%)
+    transform: translateX(-50%)
   }
   
-  .list li {
+  .portfolio-list li {
     list-style-type: none;
-    
-    width: 200px;
-    height: 200px;
+    width: 60vmin;
+    height: 60vmin;
     opacity: .25;
     position: absolute;
     left: 50%;
-    margin-left: -100px;
     border-radius: 25px;
     background: #db666f;
     transition: transform 1s, opacity 1s;
   }
   
-  .list .act {
+  .portfolio-list .act {
     opacity: 1;
     box-shadow: #777 0 0 20px;
-    transform: scale(1.1);
+    transform: translateX(-50%) scale(1.1);
   }
   
-  .list .prev,
-  .list .next {
+  .portfolio-list .prev,
+  .portfolio-list .next {
     cursor: pointer;
   }
   
-  .list .prev {
-    transform: translateX(-220px) scale(.85);
+  .portfolio-list .prev {
+    transform: translateX(-100%) scale(.85);
   }
   
-  .list .next {
-    transform: translateX(220px) scale(.85);
+  .portfolio-list .next {
+    transform: scale(.85);
   }
   
-  .list .hide {
+  .portfolio-list .hide {
     transform: translateX(-420px) scale(.85);
   }
   
-  .list .new-next {
+  .portfolio-list .new-next {
     transform: translateX(420px) scale(.85);
   }
   
-  .list .hide,
-  .list .new-next {
+  .portfolio-list .hide,
+  .portfolio-list .new-next {
     opacity: 0;
     transition: opacity .5s, transform .5s;
   }
   
   .swipe {
-    width: 270px;
-    height: 200px;
+    width: 60vmin;
+    height: 60vmin;
     position: absolute;
     background-color: #db666f;
-    border-radius: 2px;
+    border-radius: 25px;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     opacity: 0;
   }
-
-
 .contact-section {
     background-image: linear-gradient(#db666f, #ffad4c);
     z-index: 4;
@@ -269,6 +264,12 @@ footer > div > .footer-logo{
 .contact-icons-wrapper img{ 
     width: 12vmin;
     margin:3vmin;
+    cursor: pointer;
+    transition: all .5s ease;
+}
+.contact-icons-wrapper img:hover{ 
+    transform: translateY(-10px);
+    filter: invert(1);
 }
 footer{
     position: absolute;
