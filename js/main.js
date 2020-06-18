@@ -1,4 +1,8 @@
 (function(){
+  const myFullpage = new fullpage('#fullpage', {
+    anchors: ['home', 'o-mnie', 'portfolio', 'kontakt'],
+    lazyLoad: true
+});
  const menuButton = document.getElementById('menu-button');
     let menuOpened = false;
     menuButton.addEventListener("click", function(e){

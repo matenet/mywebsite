@@ -1,6 +1,10 @@
 *{
     box-sizing: border-box;
 }
+*::selection{
+    color: #fff;
+    background: rgb(110, 95, 128);
+}
 @font-face{
     font-family: Licencia;
     font-display: auto;
@@ -28,7 +32,7 @@ h2{
     letter-spacing: 2px;
 }
 p{
-    font-size: 4vmin;
+    font-size: 3.5vmin;
     letter-spacing: 1px;
     text-align: justify;
 }
@@ -202,7 +206,7 @@ footer > div > .footer-logo{
   
   .portfolio-list .act {
     opacity: 1;
-    box-shadow: #777 0 0 20px;
+    box-shadow: #777 0 0 15px 1px;
     transform: translateX(-50%) scale(1.1);
   }
   
