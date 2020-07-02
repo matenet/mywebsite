@@ -117,26 +117,25 @@ let portfolioItems = {
     //   "siteUrl": "https://fb.com",
     //   "repoUrl": "https://github.com",
     // },
-    // {
-    //   "id": 4,
-    //   "title": "Lorem 4",
-    //   "imageUrl": "https://images.pexels.com/photos/68147/waterfall-thac-dray-nur-buon-me-thuot-daklak-68147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    //   "siteUrl": "https://fb.com",
-    //   "repoUrl": "https://github.com",
-    // },
-    // {
-    //   "id": 5,
-    //   "title": "Lorem 5",
-    //   "imageUrl": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    //   "siteUrl": "https://fb.com",
-    //   "repoUrl": "https://github.com",
-    // },
+    {
+      "id": 4,
+      "title": "Lorem 4",
+      "imageUrl": "https://images.pexels.com/photos/68147/waterfall-thac-dray-nur-buon-me-thuot-daklak-68147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "siteUrl": "https://fb.com",
+      "repoUrl": "https://github.com",
+    },
+    {
+      "id": 5,
+      "title": "Lorem 5",
+      "imageUrl": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "siteUrl": "https://fb.com",
+      "repoUrl": "https://github.com",
+    },
   ] 
 }
 const createCarouselItems = (data) => {
   let carouselItemsCount = null;
   if(data.items != undefined) carouselItemsCount = data.items.length;
-  let newLi = document.createElement('li');
 
   if(carouselItemsCount == null || carouselItemsCount == 0) {
     const noItemsText = document.createElement('h2');
@@ -144,18 +143,19 @@ const createCarouselItems = (data) => {
     $(".portfolio-list").appendChild(noItemsText);
     $(".portfolio-list").style.padding = 0;
   } 
-
-  data.items.forEach((element, index) => {
-    
-    newLi.innerHTML = `<h4>${element.title}</h4>`;
-    index === 0 ? newLi.classList.add("prev") : null;
-    index === 1 ? newLi.classList.add("act") : null;
-    index === 2 ? newLi.classList.add("next") : null;
-    index > 2 ? newLi.classList.add(".hide") : null;
-    $(".portfolio-list").appendChild(newLi);
-  });
-
-portfolioDOMLi = $all(".portfolio-list > li");
+  else {
+    data.items.forEach((element, index) => {
+    let newLi = document.createElement('li');
+      newLi.innerHTML = `<h4>${element.title}</h4>`;
+      index === 0 ? newLi.classList.add("prev") : null;
+      index === 1 ? newLi.classList.add("act") : null;
+      index === 2 ? newLi.classList.add("next") : null;
+      index > 2 ? newLi.classList.add(".hide") : null;
+      $(".portfolio-list").appendChild(newLi);
+    });
+  
+    portfolioDOMLi = $all(".portfolio-list > li");
+  }
 }
 
 function next() {
