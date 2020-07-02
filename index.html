@@ -55,12 +55,6 @@
     <section class="section portfolio-section">
         <h2 class="section-title">Portfolio</h2>
         <ul class="portfolio-list">
-            <!-- <li class="hide">
-              TEST
-            </li>
-            <li class="prev">1</li>
-            <li class="act">2</li> -->
-            <!-- <li class="next">3</li> -->
           </ul>
           <div class="swipe"></div>
             <a href="#kontakt">
@@ -102,54 +96,63 @@
 
 let portfolioItems = {
   "items": [
-    {
-      "id": 1,
-      "title": "Lorem 1",
-      "imageUrl": "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 2,
-      "title": "Lorem 2",
-      "imageUrl": "https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 3,
-      "title": "Lorem 3",
-      "imageUrl": "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 4,
-      "title": "Lorem 4",
-      "imageUrl": "https://images.pexels.com/photos/68147/waterfall-thac-dray-nur-buon-me-thuot-daklak-68147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 5,
-      "title": "Lorem 5",
-      "imageUrl": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
+    // {
+    //   "id": 1,
+    //   "title": "Lorem 1",
+    //   "imageUrl": "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    //   "siteUrl": "https://fb.com",
+    //   "repoUrl": "https://github.com",
+    // },
+    // {
+    //   "id": 2,
+    //   "title": "Lorem 2",
+    //   "imageUrl": "https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    //   "siteUrl": "https://fb.com",
+    //   "repoUrl": "https://github.com",
+    // },
+    // {
+    //   "id": 3,
+    //   "title": "Lorem 3",
+    //   "imageUrl": "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    //   "siteUrl": "https://fb.com",
+    //   "repoUrl": "https://github.com",
+    // },
+    // {
+    //   "id": 4,
+    //   "title": "Lorem 4",
+    //   "imageUrl": "https://images.pexels.com/photos/68147/waterfall-thac-dray-nur-buon-me-thuot-daklak-68147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    //   "siteUrl": "https://fb.com",
+    //   "repoUrl": "https://github.com",
+    // },
+    // {
+    //   "id": 5,
+    //   "title": "Lorem 5",
+    //   "imageUrl": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    //   "siteUrl": "https://fb.com",
+    //   "repoUrl": "https://github.com",
+    // },
   ] 
 }
 const createCarouselItems = (data) => {
+  let carouselItemsCount = null;
+  if(data.items != undefined) carouselItemsCount = data.items.length;
+  let newLi = document.createElement('li');
+
+  if(carouselItemsCount == null || carouselItemsCount == 0) {
+    const noItemsText = document.createElement('h2');
+    noItemsText.innerText = 'No items to show!'
+    $(".portfolio-list").appendChild(noItemsText);
+    $(".portfolio-list").style.padding = 0;
+  } 
+
   data.items.forEach((element, index) => {
-
-    let newLi = document.createElement('li');
-  newLi.innerHTML = `<h4>${element.title}</h4>`;
-  index === 0 ? newLi.classList.add("prev") : null;
-  index === 1 ? newLi.classList.add("act") : null;
-  index === 2 ? newLi.classList.add("next") : null;
-  index > 2 ? newLi.classList.add(".hide") : null;
-
-   $(".portfolio-list").appendChild(newLi);
+    
+    newLi.innerHTML = `<h4>${element.title}</h4>`;
+    index === 0 ? newLi.classList.add("prev") : null;
+    index === 1 ? newLi.classList.add("act") : null;
+    index === 2 ? newLi.classList.add("next") : null;
+    index > 2 ? newLi.classList.add(".hide") : null;
+    $(".portfolio-list").appendChild(newLi);
   });
 
 portfolioDOMLi = $all(".portfolio-list > li");
