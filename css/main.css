@@ -235,6 +235,7 @@ footer > div > .footer-logo{
   .portfolio-list .new-next {
     opacity: 0;
     transition: opacity .5s, transform .5s;
+    z-index: -1;
   }
   
   .swipe {

@@ -96,27 +96,27 @@
 
 let portfolioItems = {
   "items": [
-    // {
-    //   "id": 1,
-    //   "title": "Lorem 1",
-    //   "imageUrl": "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-    //   "siteUrl": "https://fb.com",
-    //   "repoUrl": "https://github.com",
-    // },
-    // {
-    //   "id": 2,
-    //   "title": "Lorem 2",
-    //   "imageUrl": "https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    //   "siteUrl": "https://fb.com",
-    //   "repoUrl": "https://github.com",
-    // },
-    // {
-    //   "id": 3,
-    //   "title": "Lorem 3",
-    //   "imageUrl": "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    //   "siteUrl": "https://fb.com",
-    //   "repoUrl": "https://github.com",
-    // },
+    {
+      "id": 1,
+      "title": "Lorem 1",
+      "imageUrl": "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+      "siteUrl": "https://fb.com",
+      "repoUrl": "https://github.com",
+    },
+    {
+      "id": 2,
+      "title": "Lorem 2",
+      "imageUrl": "https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "siteUrl": "https://fb.com",
+      "repoUrl": "https://github.com",
+    },
+    {
+      "id": 3,
+      "title": "Lorem 3",
+      "imageUrl": "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "siteUrl": "https://fb.com",
+      "repoUrl": "https://github.com",
+    },
     {
       "id": 4,
       "title": "Lorem 4",
@@ -133,8 +133,11 @@ let portfolioItems = {
     },
   ] 
 }
+
+let carouselItemsCount = null;
+let numberOfElWithActClass = 0;
+
 const createCarouselItems = (data) => {
-  let carouselItemsCount = null;
   if(data.items != undefined) carouselItemsCount = data.items.length;
 
   if(carouselItemsCount == null || carouselItemsCount == 0) {
@@ -144,71 +147,117 @@ const createCarouselItems = (data) => {
     $(".portfolio-list").style.padding = 0;
   } 
   else {
+    numberOfElWithActClass = 0;
     data.items.forEach((element, index) => {
-    let newLi = document.createElement('li');
+      let newLi = document.createElement('li');
       newLi.innerHTML = `<h4>${element.title}</h4>`;
-      index === 0 ? newLi.classList.add("prev") : null;
-      index === 1 ? newLi.classList.add("act") : null;
-      index === 2 ? newLi.classList.add("next") : null;
-      index > 2 ? newLi.classList.add(".hide") : null;
+      index === 0 ? newLi.classList.add("act") : null;
+      index === 1 ? newLi.classList.add("next") : null;
+      index === 2 ? newLi.classList.add("new-next") : null;
+      index > 2 ? newLi.classList.add("hide") : null;
       $(".portfolio-list").appendChild(newLi);
     });
   
     portfolioDOMLi = $all(".portfolio-list > li");
+    // console.log(portfolioDOMLi[0]);
   }
 }
+// function getNumberElWithActClass() {
+//   return numberOfElWithActClass;
+// }
 
 function next() {
-  if ($(".hide")) {
-    $(".hide").remove(); 
+  // getNumberElWithActClass();
+  // if ($(".hide")) {
+  //   $(".hide").remove(); 
+  // }
+
+  // /* Step */
+
+  // if ($(".prev")) {
+  //   $(".prev").classList.add("hide");
+  //   $(".prev").classList.remove("prev");
+  if(numberOfElWithActClass < carouselItemsCount) {
+    portfolioDOMLi[numberOfElWithActClass].classList.remove("act");
+    portfolioDOMLi[numberOfElWithActClass].classList.add("prev");
+    portfolioDOMLi[numberOfElWithActClass+1].classList.remove("next");
+    portfolioDOMLi[numberOfElWithActClass+1].classList.add("act");
+    
+    if(portfolioDOMLi[numberOfElWithActClass+2]) {
+      portfolioDOMLi[numberOfElWithActClass+2].classList.remove(...portfolioDOMLi[numberOfElWithActClass+2].classList);
+      portfolioDOMLi[numberOfElWithActClass+2].classList.add("next");
+    }
+
+    if(portfolioDOMLi[numberOfElWithActClass-1]) {
+      portfolioDOMLi[numberOfElWithActClass-1].classList.remove(...portfolioDOMLi[numberOfElWithActClass-1].classList);
+      portfolioDOMLi[numberOfElWithActClass-1].classList.add("hide");
+    }
+
+    numberOfElWithActClass++;
   }
+  // portfolioDOMLi[numberOfElWithActClass+2].classList.add("next");
+  // }
 
-  /* Step */
+  // $(".act").classList.add("prev");
+  // $(".act").classList.remove("act");
 
-  if ($(".prev")) {
-    $(".prev").classList.add("hide");
-    $(".prev").classList.remove("prev");
-  }
+  // $(".next").classList.add("act");
+  // $(".next").classList.remove("next");
 
-  $(".act").classList.add("prev");
-  $(".act").classList.remove("act");
-
-  $(".next").classList.add("act");
-  $(".next").classList.remove("next");
-
-  /* New Next */
+  // /* New Next */
 
 
-  const addedEl = document.createElement('li');
+  // const addedEl = document.createElement('li');
 
-  $(".portfolio-list").appendChild(addedEl);
-  addedEl.classList.add("next","new-next");
+  // $(".portfolio-list").appendChild(addedEl);
+  // addedEl.classList.add("next","new-next");
 }
 
 function prev() {
-  $(".new-next").remove();
+   
+ if(numberOfElWithActClass > 0) {
+    portfolioDOMLi[numberOfElWithActClass].classList.remove("act");
+    portfolioDOMLi[numberOfElWithActClass].classList.add("next");
+    portfolioDOMLi[numberOfElWithActClass-1].classList.remove("prev");
+    portfolioDOMLi[numberOfElWithActClass-1].classList.add("act");
     
-  /* Step */
+    if(portfolioDOMLi[numberOfElWithActClass-2]) {
+      portfolioDOMLi[numberOfElWithActClass-2].classList.remove(...portfolioDOMLi[numberOfElWithActClass-2].classList);
+      portfolioDOMLi[numberOfElWithActClass-2].classList.add("prev");
+    }
+    
+    if(portfolioDOMLi[numberOfElWithActClass+1]) {
+      portfolioDOMLi[numberOfElWithActClass+1].classList.remove(...portfolioDOMLi[numberOfElWithActClass+1].classList);
+      portfolioDOMLi[numberOfElWithActClass+1].classList.add("hide");
+    }
+    numberOfElWithActClass--;
+    console.log(numberOfElWithActClass);
+  }
 
-  $(".act").classList.add("next");
-  $(".act").classList.remove("act");
+  // $(".new-next").remove();
+    
+  // /* Step */
 
-  $(".prev").classList.add("act");
-  $(".prev").classList.remove("prev");
+  // $(".act").classList.add("next");
+  // $(".act").classList.remove("act");
 
-  /* New Prev */
+  // $(".prev").classList.add("act");
+  // $(".prev").classList.remove("prev");
 
-  $(".prev").classList.add("prev");
-  $(".prev").classList.remove("prev");
+  // /* New Prev */
 
-  const addedEl = document.createElement('li');
+  // $(".prev").classList.add("prev");
+  // $(".prev").classList.remove("prev");
 
-  $(".portfolio-list").insertBefore(addedEl, $(".portfolio-list").firstChild);
-  addedEl.classList.add("hide");
+  // const addedEl = document.createElement('li');
+
+  // $(".portfolio-list").insertBefore(addedEl, $(".portfolio-list").firstChild);
+  // addedEl.classList.add("hide");
 }
 
 slide = element => {
   /* Next slide */
+  console.log(element);
   
   if (element.classList.contains('next')) {
     next();
@@ -222,7 +271,6 @@ slide = element => {
 
 
 createCarouselItems(portfolioItems);
-console.log(portfolioDOMLi);
 
 const slider = $(".portfolio-list"),
       swipe = new Hammer($(".swipe"));
