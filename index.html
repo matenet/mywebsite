@@ -94,89 +94,74 @@
     return document.querySelectorAll(selector);
   }
 
-let portfolioItems = {
-  "items": [
-    {
-      "id": 1,
-      "title": "Lorem 1",
-      "imageUrl": "https://images.pexels.com/photos/36762/scarlet-honeyeater-bird-red-feathers.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
+  const options = {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json"
     },
-    {
-      "id": 2,
-      "title": "Lorem 2",
-      "imageUrl": "https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 3,
-      "title": "Lorem 3",
-      "imageUrl": "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 4,
-      "title": "Lorem 4",
-      "imageUrl": "https://images.pexels.com/photos/68147/waterfall-thac-dray-nur-buon-me-thuot-daklak-68147.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-    {
-      "id": 5,
-      "title": "Lorem 5",
-      "imageUrl": "https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "siteUrl": "https://fb.com",
-      "repoUrl": "https://github.com",
-    },
-  ] 
-}
+    body: JSON.stringify({
+      query: 
+        `{projects {
+          id
+          siteUrl
+          githubUrl
+          title
+          image {
+            url
+          }
+        }}`
+    })
+  };
+  let portfolioItems = null;
+  fetch(`https://api-eu-central-1.graphcms.com/v2/ckca7ovz30a0201wdcrmt8b53/master`, options)
+    .then(res => res.json())
+    .then(res => renderPortfolioItems(res));
+
+  const renderPortfolioItems = ({ data }) => {
+  const portfolioItems = data;
+  console.log(portfolioItems);
+  
+createCarouselItems(portfolioItems);
+  }
 
 let carouselItemsCount = null;
 let numberOfElWithActClass = 0;
 
 const createCarouselItems = (data) => {
-  if(data.items != undefined) carouselItemsCount = data.items.length;
+  if(data.projects != undefined) carouselItemsCount = data.projects.length;
 
   if(carouselItemsCount == null || carouselItemsCount == 0) {
-    const noItemsText = document.createElement('h2');
-    noItemsText.innerText = 'No items to show!'
+    let noItemsText = document.createElement('h2');
+    noItemsText.innerText = 'No projects to show!'
     $(".portfolio-list").appendChild(noItemsText);
     $(".portfolio-list").style.padding = 0;
   } 
   else {
     numberOfElWithActClass = 0;
-    data.items.forEach((element, index) => {
+    data.projects.forEach((element, index) => {
       let newLi = document.createElement('li');
-      newLi.innerHTML = `<h4>${element.title}</h4>`;
+      newLi.innerHTML = `
+        <img src="${element.image.url}" class="portfolio-image"></img>
+        <h4 class="text-white portfolio-title">${element.title}</h4>
+        <a href="${element.siteUrl}">
+          <img src="img/link_icon.png" class="portfolio-icon"></img>
+        </a>
+        <a href="${element.githubUrl}">
+          <img src="img/github_icon.png" class="portfolio-icon"></img>
+        </a>
+
+      `;
       index === 0 ? newLi.classList.add("act") : null;
       index === 1 ? newLi.classList.add("next") : null;
       index === 2 ? newLi.classList.add("new-next") : null;
       index > 2 ? newLi.classList.add("hide") : null;
       $(".portfolio-list").appendChild(newLi);
     });
-  
     portfolioDOMLi = $all(".portfolio-list > li");
-    // console.log(portfolioDOMLi[0]);
   }
 }
-// function getNumberElWithActClass() {
-//   return numberOfElWithActClass;
-// }
 
 function next() {
-  // getNumberElWithActClass();
-  // if ($(".hide")) {
-  //   $(".hide").remove(); 
-  // }
-
-  // /* Step */
-
-  // if ($(".prev")) {
-  //   $(".prev").classList.add("hide");
-  //   $(".prev").classList.remove("prev");
   if(numberOfElWithActClass < carouselItemsCount) {
     portfolioDOMLi[numberOfElWithActClass].classList.remove("act");
     portfolioDOMLi[numberOfElWithActClass].classList.add("prev");
@@ -195,22 +180,6 @@ function next() {
 
     numberOfElWithActClass++;
   }
-  // portfolioDOMLi[numberOfElWithActClass+2].classList.add("next");
-  // }
-
-  // $(".act").classList.add("prev");
-  // $(".act").classList.remove("act");
-
-  // $(".next").classList.add("act");
-  // $(".next").classList.remove("next");
-
-  // /* New Next */
-
-
-  // const addedEl = document.createElement('li');
-
-  // $(".portfolio-list").appendChild(addedEl);
-  // addedEl.classList.add("next","new-next");
 }
 
 function prev() {
@@ -230,54 +199,27 @@ function prev() {
       portfolioDOMLi[numberOfElWithActClass+1].classList.remove(...portfolioDOMLi[numberOfElWithActClass+1].classList);
       portfolioDOMLi[numberOfElWithActClass+1].classList.add("hide");
     }
+
     numberOfElWithActClass--;
-    console.log(numberOfElWithActClass);
   }
-
-  // $(".new-next").remove();
-    
-  // /* Step */
-
-  // $(".act").classList.add("next");
-  // $(".act").classList.remove("act");
-
-  // $(".prev").classList.add("act");
-  // $(".prev").classList.remove("prev");
-
-  // /* New Prev */
-
-  // $(".prev").classList.add("prev");
-  // $(".prev").classList.remove("prev");
-
-  // const addedEl = document.createElement('li');
-
-  // $(".portfolio-list").insertBefore(addedEl, $(".portfolio-list").firstChild);
-  // addedEl.classList.add("hide");
 }
 
 slide = element => {
-  /* Next slide */
-  console.log(element);
-  
+  /* Next slide */  
   if (element.classList.contains('next')) {
     next();
     
   /* Previous slide */
-    
   } else if (element.classList.contains('prev')) {
     prev();
   }
 }
 
 
-createCarouselItems(portfolioItems);
-
 const slider = $(".portfolio-list"),
       swipe = new Hammer($(".swipe"));
 
-slider.onclick = event => {
-  slide(event.target);
-}
+slider.onclick = event => slide(event.target);
 
 swipe.on("swipeleft", (ev) => {
   next();
