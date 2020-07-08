@@ -239,7 +239,6 @@ footer > div > .footer-logo{
   
   .portfolio-list .prev,
   .portfolio-list .next {
-    cursor: pointer;
     z-index: 1;
   }
   
