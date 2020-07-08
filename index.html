@@ -25,7 +25,7 @@
             </ul>           
        </nav> 
    </header> 
-   <section class="section home-section">
+   <section class="section home-section"><div class="loadingio-spinner-interwind-dxq043jbf4m"><div class="ldio-5odghaj43tq">
        <h1>Mateusz Wnęk</h1>
        <h2>Full Stack Developer</h2>
        <img src="img/matenet_logo.png" alt="Logo matenet - programowanie stron www - mobile first" class="logo">
@@ -42,7 +42,8 @@
             <p class="about-me-text text-white">
                 Jestem ambitnym full stack developerem, który lubi uczyć się nowych technologii, aby móc wykorzystać je w swoich projektach.
                 Zawodowo zajmuję się programowaniem już od ponad 3 lat. Podczas studiów miałem okazję programować w kilku językach, między innymi w takich jak: C++, czy JAVA. 
-                Zawsze jednak wracałem do programowania webowego z użyciem HTML, CSS i JS. Podoba mi się w nim możliwość tworzenia łatwo dostępnych aplikacji, które działają online - bez potrzeby instalacji.
+                Zawsze jednak wracałem do programowania webowego z użyciem HTML, CSS i JS. Podoba mi się w nim możliwość tworzenia łatwo dostępnych aplikacji, 
+                które działają online bez potrzeby instalacji.
                 Ponadto projektując estetyczny i funkcjonalny design dla aplikacji webowych, pozwalam uwolnić się swojej duszy artystycznej.
             </p>
         </article>
@@ -54,8 +55,8 @@
     </section>
     <section class="section portfolio-section">
         <h2 class="section-title">Portfolio</h2>
-        <ul class="portfolio-list">
-          </ul>
+        <ul class="portfolio-list"></ul>
+          <div class="square loader-tile red-background"></div>
           <div class="swipe"></div>
             <a href="#kontakt">
                 <div class="square scroll-down red-background">
@@ -66,10 +67,15 @@
     <section class="section contact-section">
         <h2 class="section-title text-white">Kontakt</h2>
         <article class="columns-wrapper contact-icons-wrapper">
-            <img src="img/fb_icon.png" alt="Facebook-icon">
+          <a href="http://linkedin.com">
             <img src="img/linkedin_icon.png" alt="Facebook-icon">
+          </a>
+          <a href="http://github.com/matenet">
             <img src="img/github_icon.png" alt="Facebook-icon">
+          </a>
+          <a href="http://matenet.pl">
             <img src="img/cv_icon.png" alt="Facebook-icon">
+          </a>
         </article>
         <footer class="footer-section">
             <div class="square left-from-menu-button white-background"></div>
@@ -82,153 +88,6 @@
    </div>
     <script async src="js/main.js"></script>
     <script src="js/hammer.min.js"></script>
-
-<script>
-  let portfolioDOMLi = null;
-  
-  const $ = selector => {
-    return document.querySelector(selector);
-  };
-  
-  const $all = selector => {
-    return document.querySelectorAll(selector);
-  }
-
-  const options = {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      query: 
-        `{projects {
-          id
-          siteUrl
-          githubUrl
-          title
-          image {
-            url
-          }
-        }}`
-    })
-  };
-  let portfolioItems = null;
-  fetch(`https://api-eu-central-1.graphcms.com/v2/ckca7ovz30a0201wdcrmt8b53/master`, options)
-    .then(res => res.json())
-    .then(res => renderPortfolioItems(res));
-
-  const renderPortfolioItems = ({ data }) => {
-  const portfolioItems = data;
-  console.log(portfolioItems);
-  
-createCarouselItems(portfolioItems);
-  }
-
-let carouselItemsCount = null;
-let numberOfElWithActClass = 0;
-
-const createCarouselItems = (data) => {
-  if(data.projects != undefined) carouselItemsCount = data.projects.length;
-
-  if(carouselItemsCount == null || carouselItemsCount == 0) {
-    let noItemsText = document.createElement('h2');
-    noItemsText.innerText = 'No projects to show!'
-    $(".portfolio-list").appendChild(noItemsText);
-    $(".portfolio-list").style.padding = 0;
-  } 
-  else {
-    numberOfElWithActClass = 0;
-    data.projects.forEach((element, index) => {
-      let newLi = document.createElement('li');
-      newLi.innerHTML = `
-        <img src="${element.image.url}" class="portfolio-image"></img>
-        <h4 class="text-white portfolio-title">${element.title}</h4>
-        <a href="${element.siteUrl}">
-          <img src="img/link_icon.png" class="portfolio-icon"></img>
-        </a>
-        <a href="${element.githubUrl}">
-          <img src="img/github_icon.png" class="portfolio-icon"></img>
-        </a>
-
-      `;
-      index === 0 ? newLi.classList.add("act") : null;
-      index === 1 ? newLi.classList.add("next") : null;
-      index === 2 ? newLi.classList.add("new-next") : null;
-      index > 2 ? newLi.classList.add("hide") : null;
-      $(".portfolio-list").appendChild(newLi);
-    });
-    portfolioDOMLi = $all(".portfolio-list > li");
-  }
-}
-
-function next() {
-  if(numberOfElWithActClass < carouselItemsCount) {
-    portfolioDOMLi[numberOfElWithActClass].classList.remove("act");
-    portfolioDOMLi[numberOfElWithActClass].classList.add("prev");
-    portfolioDOMLi[numberOfElWithActClass+1].classList.remove("next");
-    portfolioDOMLi[numberOfElWithActClass+1].classList.add("act");
-    
-    if(portfolioDOMLi[numberOfElWithActClass+2]) {
-      portfolioDOMLi[numberOfElWithActClass+2].classList.remove(...portfolioDOMLi[numberOfElWithActClass+2].classList);
-      portfolioDOMLi[numberOfElWithActClass+2].classList.add("next");
-    }
-
-    if(portfolioDOMLi[numberOfElWithActClass-1]) {
-      portfolioDOMLi[numberOfElWithActClass-1].classList.remove(...portfolioDOMLi[numberOfElWithActClass-1].classList);
-      portfolioDOMLi[numberOfElWithActClass-1].classList.add("hide");
-    }
-
-    numberOfElWithActClass++;
-  }
-}
-
-function prev() {
-   
- if(numberOfElWithActClass > 0) {
-    portfolioDOMLi[numberOfElWithActClass].classList.remove("act");
-    portfolioDOMLi[numberOfElWithActClass].classList.add("next");
-    portfolioDOMLi[numberOfElWithActClass-1].classList.remove("prev");
-    portfolioDOMLi[numberOfElWithActClass-1].classList.add("act");
-    
-    if(portfolioDOMLi[numberOfElWithActClass-2]) {
-      portfolioDOMLi[numberOfElWithActClass-2].classList.remove(...portfolioDOMLi[numberOfElWithActClass-2].classList);
-      portfolioDOMLi[numberOfElWithActClass-2].classList.add("prev");
-    }
-    
-    if(portfolioDOMLi[numberOfElWithActClass+1]) {
-      portfolioDOMLi[numberOfElWithActClass+1].classList.remove(...portfolioDOMLi[numberOfElWithActClass+1].classList);
-      portfolioDOMLi[numberOfElWithActClass+1].classList.add("hide");
-    }
-
-    numberOfElWithActClass--;
-  }
-}
-
-slide = element => {
-  /* Next slide */  
-  if (element.classList.contains('next')) {
-    next();
-    
-  /* Previous slide */
-  } else if (element.classList.contains('prev')) {
-    prev();
-  }
-}
-
-
-const slider = $(".portfolio-list"),
-      swipe = new Hammer($(".swipe"));
-
-slider.onclick = event => slide(event.target);
-
-swipe.on("swipeleft", (ev) => {
-  next();
-});
-
-swipe.on("swiperight", (ev) => {
-  prev();
-});
-</script>
 
 </body>
 </html>
