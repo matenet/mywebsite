@@ -227,6 +227,7 @@ footer > div > .footer-logo{
     left: 50%;
     border-radius: 25px;
     background: #db666f;
+    cursor: grab;
     transition: transform 1s, opacity 1s;
   }
   
