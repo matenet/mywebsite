@@ -153,8 +153,7 @@ function prev() {
 //   }
 // }
 
-const slider = $(".portfolio-list"),
-    swipe = new Hammer($(".swipe"));
+const swipe = new Hammer($(".swipe"));
 
 // slider.onclick = event => slide(event.target);
 
